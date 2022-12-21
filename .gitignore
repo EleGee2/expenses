@@ -1,0 +1,11 @@
+__pycache__/
+db.sqlite3
+*.log
+
+# Environments
+expenseswebsite/.env
+.venv
+env/
+venv/
+
+.idea/
