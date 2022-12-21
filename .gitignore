@@ -3,7 +3,7 @@ db.sqlite3
 *.log
 
 # Environments
-expenseswebsite/.env
+.env
 .venv
 env/
 venv/
