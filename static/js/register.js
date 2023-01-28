@@ -9,30 +9,35 @@ const passwordField = document.querySelector("#passwordField")
 const submitBtn = document.querySelector(".submit-btn")
 
 usernameField.addEventListener("keyup", (e) => {
-    const usernameValue = e.target.value
-    usernameSuccess.style.display = "block"
+    try {
+       const usernameValue = e.target.value
+        usernameSuccess.style.display = "block"
 
-    // usernameSuccess.textContent = `Checking ${usernameValue}`
-    usernameField.classList.remove("is-invalid")
-    feedbackField.style.display = "none"
+        // usernameSuccess.textContent = `Checking ${usernameValue}`
+        usernameField.classList.remove("is-invalid")
+        feedbackField.style.display = "none"
 
-    if (usernameValue.length > 0) {
-        fetch('/authentication/validate-username', {
-            body: JSON.stringify({username: usernameValue }),
-            method: "POST"
-        }).then(response => response.json())
-            .then(data => {
-                usernameSuccess.style.display = "none"
-                if (data.error) {
-                    usernameField.classList.add("is-invalid")
-                    feedbackField.style.display = "block"
-                    feedbackField.innerHTML = `<p>${data.error}</p>`
-                    submitBtn.disabled = true
-                } else {
-                    submitBtn.removeAttribute('disabled')
-                }
-            })
+        if (usernameValue.length > 0) {
+            fetch('/authentication/validate-username', {
+                body: JSON.stringify({username: usernameValue }),
+                method: "POST"
+            }).then(response => response.json())
+                .then(data => {
+                    usernameSuccess.style.display = "none"
+                    if (data.error) {
+                        usernameField.classList.add("is-invalid")
+                        feedbackField.style.display = "block"
+                        feedbackField.innerHTML = `<p>${data.error}</p>`
+                        submitBtn.disabled = true
+                    } else {
+                        submitBtn.removeAttribute('disabled')
+                    }
+                })
+        }
+    } catch (error) {
+        return
     }
+
 })
 
 emailField.addEventListener("keyup", (e) => {
@@ -67,6 +72,7 @@ emailField.addEventListener("keyup", (e) => {
 })
 
 showPasswordToggle.addEventListener("click", (e) => {
+    console.log(111)
     if (showPasswordToggle.textContent === "Show Password") {
         showPasswordToggle.textContent = "Hide Password"
         passwordField.setAttribute("type", "text")
