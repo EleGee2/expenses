@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
+import django_heroku
 from pathlib import Path
 import environ
 from django.contrib import messages
@@ -147,4 +148,7 @@ EMAIL_USE_TLS = env("EMAIL_USE_TLS")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+
+
+django_heroku.settings(locals())
 
