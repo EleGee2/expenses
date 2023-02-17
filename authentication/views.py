@@ -1,4 +1,5 @@
 import json
+import threading
 
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -18,6 +19,14 @@ from authentication.utils import send_activation_email, account_activation_token
 
 
 # Create your views here.
+
+class EmailThread(threading.Thread):
+    def __init__(self, email):
+        self.email = email
+        threading.Thread.__init__(self)
+
+    def run(self):
+        self.email.send
 
 
 class UsernameValidationView(View):
