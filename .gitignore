@@ -9,4 +9,4 @@ env/
 venv/
 
 .idea/
-.env
+.env/
